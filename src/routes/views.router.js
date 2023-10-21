@@ -11,11 +11,12 @@ ViewsRouter.get("/products", async (req, res) => {
 })
 
 ViewsRouter.get("/cart/:cid", async (req, res) => {
-    const { cid } = req.body
+    const { cid } = req.params
     try {
-        const cartid = await CartM.GetByID(cid)
-        console.log(cartid)
-        res.render('cartId', ({ cartid }))
+        const cart = await CartM.GetByID(cid)
+        const Productos = cart.Products
+        console.log(Productos)
+        res.render('cartId', ({ Productos }))
     } catch (error) { res.status(500).json(error) }
 })
 
