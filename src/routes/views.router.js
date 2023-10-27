@@ -6,7 +6,6 @@ const ViewsRouter = Router()
 
 ViewsRouter.get("/products", async (req, res) => {
     let Productos = await ProductManager.GetAll(req.query)
-    Productos = Productos.docs
     res.render('allproducts', ({ Productos }))
 })
 

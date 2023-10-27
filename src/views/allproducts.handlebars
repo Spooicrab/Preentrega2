@@ -1,11 +1,14 @@
 <style>
   #productos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
   #productos>div { background-color: #f2f2f2; padding: 20px; border-radius: 5px;
-  text-align: center; }
+  text-align: center; } .pagination-link { padding: 10px 20px; background-color:
+  #007bff; color: #fff; border: none; cursor: pointer; margin-top: 10px;
+  display: inline-block; text-decoration: none; border-radius: 5px; }
+  .pagination-link:hover { background-color: #0056b3; }
 </style>
 
 <div id="productos">
-  {{#each Productos}}
+  {{#each Productos.docs}}
     <div>
       <h3>{{title}}</h3>
       <h2>{{_id}}</h2>
@@ -15,7 +18,20 @@
     </div>
   {{/each}}
 </div>
-
+<div>
+  {{#if Productos.hasPrevPage}}
+    <a
+      href="/views/products?page={{Productos.prevPage}}"
+      class="pagination-link"
+    >Página anterior</a>
+  {{/if}}
+  {{#if Productos.hasNextPage}}
+    <a
+      href="/views/products?page={{Productos.nextPage}}"
+      class="pagination-link"
+    >Página siguiente</a>
+  {{/if}}
+</div>
 <h2 style="color: #333; font-family: Arial, sans-serif; font-size: 24px;">CREAR
   PRODUCTO</h2>
 <form action="/views/products" method="post" style="margin-top: 20px;">
